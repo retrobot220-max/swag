@@ -16,10 +16,6 @@
     #swagger-ui {
       padding: 20px;
     }
-
-    .swagger-ui .topbar {
-      display: none;
-    }
   </style>
 </head>
 
@@ -27,25 +23,13 @@
   <div id="swagger-ui"></div>
 
   <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
-  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
   <script>
     window.onload = function () {
-      const ui = SwaggerUIBundle({
-        url: './swagger.json', // или './swagger.yaml'
+      SwaggerUIBundle({
+        url: './swagger.json', // Убедитесь, что этот файл существует в папке docs/
         dom_id: '#swagger-ui',
-        deepLinking: true,
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIBundle.presets.standalone
-        ],
-        plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
-        ],
-        layout: "StandaloneLayout",
-        validatorUrl: null
+        deepLinking: true
       });
-
-      window.ui = ui;
     }
   </script>
 </body>
