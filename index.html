@@ -26,9 +26,16 @@
   <script>
     window.onload = function () {
       SwaggerUIBundle({
-        url: 'https://retrobot220-max.github.io/swag/swagger.json', // Убедитесь, что этот файл существует в папке docs/
+        url: 'https://retrobot220-max.github.io/swag/swagger.json',
         dom_id: '#swagger-ui',
-        deepLinking: true
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIBundle.presets.standalone
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ]
       });
     }
   </script>
