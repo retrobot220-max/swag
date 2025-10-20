@@ -1,0 +1,272 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API для предзаказа",
+    "description": "API для расчета скидок без создания заказа",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/orders/pre-order": {
+      "post": {
+        "summary": "Предзаказ для расчета скидок без создания заказа",
+        "tags": [
+          "PreOrder"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreOrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created context.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input."
+          },
+          "500": {
+            "description": "Server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PreOrderRequest": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "example": "cb308051-a215-492c-b3a2-2bc0c9431e11"
+          },
+          "date": {
+            "type": "string",
+            "example": "25.01.2024 12:24:00"
+          },
+          "sourceId": {
+            "type": "number",
+            "example": 10
+          },
+          "customerId": {
+            "type": "number",
+            "example": 4
+          },
+          "application": {
+            "type": "string",
+            "example": "website"
+          },
+          "hostname": {
+            "type": "string",
+            "example": "tickets.hawk.ru"
+          },
+          "possibleBonusToDebitAmount": {
+            "type": "number",
+            "example": 1000
+          },
+          "paymentMethod": {
+            "type": "number",
+            "example": 5
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          }
+        }
+      },
+      "PreOrderResponse": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "example": "TESTDB_0861"
+          },
+          "orderDate": {
+            "type": "string",
+            "example": "22.01.2024 12:18"
+          },
+          "amount": {
+            "type": "number",
+            "example": 1400
+          },
+          "amountDiscount": {
+            "type": "number",
+            "example": 1400
+          },
+          "discount": {
+            "type": "number",
+            "example": 0
+          },
+          "promocode": {
+            "type": "object",
+            "nullable": true
+          },
+          "customerId": {
+            "type": "number",
+            "example": 16318
+          },
+          "orderSourceId": {
+            "type": "number",
+            "example": 1
+          },
+          "typeName": {
+            "type": "string",
+            "example": "Еда"
+          },
+          "bonusesDebited": {
+            "type": "number",
+            "example": 0
+          },
+          "withChild": {
+            "type": "boolean",
+            "example": false
+          },
+          "possibleDiscount": {
+            "type": "number",
+            "example": 0
+          },
+          "possibleBonusToDebitAmount": {
+            "type": "number",
+            "example": 0
+          },
+          "possibleBonusToChargeAmount": {
+            "type": "number",
+            "example": 10
+          },
+          "possibleBonusToCharge": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BonusToCharge"
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "orderItemId": {
+            "type": "string",
+            "example": "TESTDB_095"
+          },
+          "eventId": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventName": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventStartDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "seasonTicketId": {
+            "type": "string",
+            "nullable": true
+          },
+          "seasonTicketName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productId": {
+            "type": "string",
+            "nullable": true
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "foodId": {
+            "type": "string",
+            "example": "333"
+          },
+          "foodName": {
+            "type": "string",
+            "example": "Бургер4"
+          },
+          "amount": {
+            "type": "number",
+            "example": 700
+          },
+          "amountDiscount": {
+            "type": "number",
+            "example": 700
+          },
+          "discount": {
+            "type": "number",
+            "example": 0
+          },
+          "quantity": {
+            "type": "number",
+            "example": 1
+          },
+          "returnedQuantity": {
+            "type": "number",
+            "example": 0
+          },
+          "price": {
+            "type": "number",
+            "example": 700
+          },
+          "priceDiscount": {
+            "type": "number",
+            "example": 700
+          },
+          "bonusesDebited": {
+            "type": "number",
+            "example": 0
+          },
+          "possibleDiscount": {
+            "type": "number",
+            "example": 0
+          },
+          "eticket": {
+            "type": "object",
+            "nullable": true
+          },
+          "seatNumber": {
+            "type": "string",
+            "example": ""
+          },
+          "withChild": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "BonusToCharge": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "example": 10
+          },
+          "ruleName": {
+            "type": "string",
+            "example": "Кэшбэк за покупку - Новичок"
+          }
+        }
+      }
+    }
+  }
+}
